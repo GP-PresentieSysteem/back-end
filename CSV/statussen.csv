@@ -1,0 +1,3 @@
+if (Time.time - starttime > 20){
+	destroy(gameObject);
+}

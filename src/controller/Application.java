@@ -34,13 +34,18 @@ public class Application {
 		SysteemDatumController systeemDatumController = new SysteemDatumController(infoSysteem);
 		LoginController loginController = new LoginController(infoSysteem);
 		MedestudentenController medestudentenController = new MedestudentenController(infoSysteem);
+		RoosterController roosterController = new RoosterController(infoSysteem);
 		
+		//Server paths
 		server.registerHandler("/systeemdatum/lesinfo", systeemDatumController);
 
 		server.registerHandler("/login", loginController);
 
   	server.registerHandler("/student/medestudenten/ophalen", medestudentenController);
   	server.registerHandler("/student/medestudenten/opslaan", medestudentenController);
+  	
+  	server.registerHandler("/rooster", roosterController);
+  	server.registerHandler("/rooster/les", roosterController);
 		
 		server.start();
 	}
