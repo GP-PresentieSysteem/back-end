@@ -286,7 +286,7 @@ public class PrIS {
 	}	
 	
 	private void vulLessen(ArrayList<Les> pLessen){
-		String csvFile = "././CSV/vakken.csv";
+		String csvFile = "././CSV/rooster.csv";
 		String line = "";
 		String cvsSplitBy = ",";
 			
@@ -297,9 +297,10 @@ public class PrIS {
 	
 			        // use comma as separator
 				String[] element = line.split(cvsSplitBy);
-				String code = element[0];
-				String naam = element[1];
-				pVakken.add(new Vak(code, naam));
+				String dag = element[0];
+				String beginTijd = element[1];
+				String eindTijd = element[2];
+				pLessen.add(new Les(code, naam));
 				
 				//System.out.println(gebruikersnaam);
 		
