@@ -35,6 +35,7 @@ public class Application {
 		LoginController loginController = new LoginController(infoSysteem);
 		MedestudentenController medestudentenController = new MedestudentenController(infoSysteem);
 		RoosterController roosterController = new RoosterController(infoSysteem);
+		PersoonController persoonController = new PersoonController(infoSysteem);
 		
 		//Server paths
 		server.registerHandler("/systeemdatum/lesinfo", systeemDatumController);
@@ -46,6 +47,8 @@ public class Application {
   	
   	server.registerHandler("/rooster", roosterController);
   	server.registerHandler("/rooster/les", roosterController);
+  	
+  	server.registerHandler("/persoon/info", persoonController);
 		
 		server.start();
 	}

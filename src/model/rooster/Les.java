@@ -13,7 +13,7 @@ public class Les {
 	private Calendar beginTijd;
 	private Calendar eindTijd;
 	
-	Les(Vak hV, Klas hK, Docent hD, Lokaal hL, Calendar bT, Calendar eT){
+	public Les(Vak hV, Klas hK, Docent hD, Lokaal hL, Calendar bT, Calendar eT){
 		huidigeVak = hV;
 		huidigeKlas = hK;
 		huidigeDocent = hD;

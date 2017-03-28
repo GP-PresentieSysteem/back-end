@@ -147,6 +147,20 @@ public class PrIS {
 		return null;
 	}
 	
+	public Klas getKlas(String klasCode) {
+		for (Klas k : deKlassen) {
+			if (k.getKlasCode().equals(klasCode)){
+				return (k);
+			}
+		}
+		
+		return null;
+	}
+	
+	public ArrayList<Klas> getKlassen(){
+		return deKlassen;
+	}
+	
 	public Student getStudent(String pGebruikersnaam) {
 		// used
 		Student lGevondenStudent = null;
@@ -175,7 +189,7 @@ public class PrIS {
 		return lGevondenStudent;
 	}
 	
-	public Vak getVakViaNaam(String naam){
+	public Vak getVak(String naam){
 		for (Vak v : deVakken) {
 			if (v.getNaam().equals(naam)) {
 				return v;
@@ -185,7 +199,7 @@ public class PrIS {
 		return null;
 	}
 	
-	public Lokaal getLokaalViaNaam(String naam){
+	public Lokaal getLokaal(String naam){
 		for (Lokaal l : deLokalen) {
 			if (l.getNaam().equals(naam)) {
 				return l;
@@ -318,11 +332,11 @@ public class PrIS {
 			
 			while ((line = br.readLine()) != null) {
 	
-			        // use comma as separator
+			  // use comma as separator
 				String[] element = line.split(cvsSplitBy);
 				String naam = element[5];
 				
-				if (getLokaalViaNaam(naam) == null)
+				if (getLokaal(naam) == null)
 					pLokalen.add(new Lokaal(naam));
 		
 			}
@@ -387,7 +401,7 @@ public class PrIS {
 				beginDatum.setTime(sdf.parse(dag+" "+beginTijd));
 				eindDatum.setTime(sdf.parse(dag+" "+eindTijd));
 				
-				pLessen.add(new Les(getVakViaNaam(vakNaam), Klas, Docent, Lokaal, beginDatum, eindDatum));
+				pLessen.add(new Les(getVak(vakNaam), getKlas(klasNaam), getDocent(docentGebruikersnaam), getLokaal(lokaalCode), beginDatum, eindDatum));
 				
 				//System.out.println(gebruikersnaam);
 		
@@ -396,6 +410,8 @@ public class PrIS {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
 			e.printStackTrace();
 		} 
 	}
