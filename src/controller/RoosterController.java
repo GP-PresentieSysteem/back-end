@@ -13,7 +13,7 @@ public class RoosterController implements Handler{
 	
 	public void handle(Conversation conversation) {
 	  if (conversation.getRequestedURI().startsWith("/rooster")) {
-	  	ophalenRooster(conversation);
+	  	ophalenRoosterKlas(conversation);
 		}
 	  
 	  if (conversation.getRequestedURI().startsWith("/rooster/les")){
@@ -21,12 +21,15 @@ public class RoosterController implements Handler{
 	  }
 	}
 	
-	private void ophalenRooster(Conversation conversation) {
+	private void ophalenRoosterKlas(Conversation conversation){
+		
+	}
+	
+	private void ophalenRoosterDocent(Conversation conversation) {
 		
 	}
 	
 	private void ophalenLes(Conversation conversation){
 		
 	}
-
 }

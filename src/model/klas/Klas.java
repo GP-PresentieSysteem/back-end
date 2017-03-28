@@ -8,6 +8,7 @@ public class Klas {
 
 	private String klasCode;
 	private String naam;
+	private Docent slbEr;
 	private ArrayList<Student> deStudenten = new ArrayList<Student>();
 
 	public Klas(String klasCode, String naam) {
