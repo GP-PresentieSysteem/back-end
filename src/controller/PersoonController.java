@@ -6,6 +6,8 @@ import javax.json.JsonBuilderFactory;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 
+import com.google.gson.Gson;
+
 import model.PrIS;
 import model.klas.Klas;
 import model.persoon.Student;
@@ -43,23 +45,11 @@ public class PersoonController implements Handler{
 	
 	//Print op dit moment alle klassen met namen uit in json
 	private void gegevensOphalen(Conversation conversation){
-		JsonArrayBuilder klassenArray = Json.createArrayBuilder();
-		JsonObjectBuilder lJsonObjectBuilder = Json.createObjectBuilder();
+		Gson gson = new Gson();
+		String jsonOut = "";
 		
-		for (Klas k : informatieSysteem.getKlassen()) {
-			JsonArrayBuilder leerlingenArray = Json.createArrayBuilder();
-			
-			for (Student s : k.getStudenten()){
-				leerlingenArray.add(s.getVoornaam());
-			}
-			
-			klassenArray.add(Json.createObjectBuilder().add(k.getKlasCode(), leerlingenArray));
-		}
+		jsonOut = gson.toJson(informatieSysteem.getKlassen()); 
 		
-		lJsonObjectBuilder.add("klassen", klassenArray);
-
-		String lJsonOut = lJsonObjectBuilder.build().toString();
-		
-		conversation.sendJSONMessage(lJsonOut);		
+		conversation.sendJSONMessage(jsonOut);		
 	}
 }
