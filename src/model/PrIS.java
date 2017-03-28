@@ -175,22 +175,10 @@ public class PrIS {
 		return lGevondenStudent;
 	}
 	
-	public Docent getDocentViaGebruikersnaam(String gebruikersnaam){
-		
-		for (Docent d : deDocenten) {
-			if (d.getGebruikersnaam().equals(gebruikersnaam)) {
-				return d;
-			}
-		}
-		
-		return null;
-	}
-	
-	public Student getStudentViaGebruikersnaam(String gebruikersnaam){
-		
-		for (Student s : deStudenten) {
-			if (s.getGebruikersnaam().equals(gebruikersnaam)) {
-				return s;
+	public Vak getVakViaNaam(String naam){
+		for (Vak v : deVakken) {
+			if (v.getNaam().equals(naam)) {
+				return v;
 			}
 		}
 		
@@ -388,6 +376,10 @@ public class PrIS {
 				String dag = element[0];
 				String beginTijd = element[1];
 				String eindTijd = element[2];
+				String vakNaam = element[3];
+				String docentGebruikersnaam = element[4];
+				String lokaalCode = element[5];
+				String klasNaam = element[6];
 				
 				Calendar beginDatum = Calendar.getInstance();
 				Calendar eindDatum = Calendar.getInstance();
@@ -395,7 +387,7 @@ public class PrIS {
 				beginDatum.setTime(sdf.parse(dag+" "+beginTijd));
 				eindDatum.setTime(sdf.parse(dag+" "+eindTijd));
 				
-				pLessen.add(new Les(Vak, Klas, Docent, Lokaal, beginDatum, eindDatum));
+				pLessen.add(new Les(getVakViaNaam(vakNaam), Klas, Docent, Lokaal, beginDatum, eindDatum));
 				
 				//System.out.println(gebruikersnaam);
 		
