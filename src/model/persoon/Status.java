@@ -3,7 +3,7 @@ package model.persoon;
 public class Status {
 	private String naam;
 	
-	Status(String nm){
+	public Status(String nm){
 		naam = nm;
 		
 	}

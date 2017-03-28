@@ -25,7 +25,16 @@ public class RoosterController implements Handler{
 		
 	}
 	
+	
+	private void ophalenAlleRoostersKlassen(Conversation conversation){
+		
+	}
+	
 	private void ophalenRoosterDocent(Conversation conversation) {
+		
+	}
+	
+	private void ophalenAlleRoostersDocenten(Conversation conversation){
 		
 	}
 	

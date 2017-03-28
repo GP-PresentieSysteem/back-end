@@ -28,4 +28,8 @@ public class PersoonController implements Handler{
 	private void aanmelden(Conversation conversation){
 		
 	}
+	
+	private void gegevensOphalen(Conversation conversation){
+		
+	}
 }

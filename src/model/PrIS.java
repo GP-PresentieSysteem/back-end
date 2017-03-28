@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import model.klas.Klas;
 import model.persoon.Docent;
+import model.persoon.Status;
 import model.persoon.Student;
 import model.rooster.Les;
 import model.vak.Vak;
@@ -24,6 +25,7 @@ public class PrIS {
 	private ArrayList<Klas> deKlassen;
 	private ArrayList<Les> deLessen;
 	private ArrayList<Vak> deVakken;
+	private ArrayList<Status> deStatussen;
 	
 	
 	/**
@@ -284,11 +286,81 @@ public class PrIS {
 	}	
 	
 	private void vulLessen(ArrayList<Les> pLessen){
+		String csvFile = "././CSV/vakken.csv";
+		String line = "";
+		String cvsSplitBy = ",";
+			
+		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))){
+	
+			
+			while ((line = br.readLine()) != null) {
+	
+			        // use comma as separator
+				String[] element = line.split(cvsSplitBy);
+				String code = element[0];
+				String naam = element[1];
+				pVakken.add(new Vak(code, naam));
+				
+				//System.out.println(gebruikersnaam);
 		
+			}
+	
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
 	}
 	
 	private void vulVakken(ArrayList<Vak> pVakken){
+		String csvFile = "././CSV/vakken.csv";
+		String line = "";
+		String cvsSplitBy = ",";
+			
+		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))){
+	
+			
+			while ((line = br.readLine()) != null) {
+	
+			        // use comma as separator
+				String[] element = line.split(cvsSplitBy);
+				String code = element[0];
+				String naam = element[1];
+				pVakken.add(new Vak(code, naam));
+				
+				//System.out.println(gebruikersnaam);
 		
+			}
+	
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+	}
+	
+	private void vulStatussen(ArrayList<Status> pStatussen){
+		String csvFile = "././CSV/statussen.csv";
+		String line = "";
+		String cvsSplitBy = ",";
+			
+		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))){
+	
+			
+			while ((line = br.readLine()) != null) {
+	
+			        // use comma as separator
+				String[] element = line.split(cvsSplitBy);
+				String naam = element[0];
+				pStatussen.add(new Status(naam));
+		
+			}
+	
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
 	}
 
 

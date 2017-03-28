@@ -4,9 +4,9 @@ public class Vak {
 	private String code;
 	private String naam;
 	
-	Vak(String cd, String nm){
-		code = cd;
-		naam = nm;
+	public Vak(String code, String naam){
+		this.code = code;
+		this.naam = naam;
 	}
 
 	public String getCode() {
