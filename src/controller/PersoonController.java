@@ -15,6 +15,8 @@ public class PersoonController implements Handler{
 	  if (conversation.getRequestedURI().startsWith("/persoon/status")) {
 	  	zetStatus(conversation);
 		}
+	  
+	  
 	}
 	
 	private void zetStatus(Conversation conversation) {

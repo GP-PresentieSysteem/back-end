@@ -7,6 +7,7 @@ import model.persoon.Docent;
 import model.persoon.Status;
 import model.persoon.Student;
 import model.rooster.Les;
+import model.rooster.Lokaal;
 import model.vak.Vak;
 
 import java.io.BufferedReader;
@@ -17,14 +18,17 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class PrIS {
 	private ArrayList<Docent> deDocenten;
 	private ArrayList<Student> deStudenten;
 	private ArrayList<Klas> deKlassen;
-	private ArrayList<Les> deLessen;
+	private ArrayList<Lokaal> deLokalen;
 	private ArrayList<Vak> deVakken;
+	private ArrayList<Les> deLessen;
 	private ArrayList<Status> deStatussen;
 	
 	
@@ -55,8 +59,10 @@ public class PrIS {
 		deDocenten = new ArrayList<Docent>();
 		deStudenten = new ArrayList<Student>();
 		deKlassen = new ArrayList<Klas>();
-		deLessen = new ArrayList<Les>();
+		deLokalen = new ArrayList<Lokaal>();
 		deVakken = new ArrayList<Vak>();
+		deLessen = new ArrayList<Les>();
+		deStatussen = new ArrayList<Status>();
 
 		// Inladen klassen
 		vulKlassen(deKlassen);
@@ -67,11 +73,17 @@ public class PrIS {
 		// Inladen docenten
 		vulDocenten(deDocenten);
 		
-		// Inladen lessen
-		vulLessen(deLessen);
+		// Inladen lokalen
+		vulLokalen(deLokalen);
 		
 		// Inladen vakken
 		vulVakken(deVakken);
+		
+		// Inladen lessen
+		vulLessen(deLessen);
+		
+		//Inladen statussen
+		vulStatussen(deStatussen);
 	
 	} //Einde Pris constructor
 	
@@ -162,6 +174,38 @@ public class PrIS {
 		
 		return lGevondenStudent;
 	}
+	
+	public Docent getDocentViaGebruikersnaam(String gebruikersnaam){
+		
+		for (Docent d : deDocenten) {
+			if (d.getGebruikersnaam().equals(gebruikersnaam)) {
+				return d;
+			}
+		}
+		
+		return null;
+	}
+	
+	public Student getStudentViaGebruikersnaam(String gebruikersnaam){
+		
+		for (Student s : deStudenten) {
+			if (s.getGebruikersnaam().equals(gebruikersnaam)) {
+				return s;
+			}
+		}
+		
+		return null;
+	}
+	
+	public Lokaal getLokaalViaNaam(String naam){
+		for (Lokaal l : deLokalen) {
+			if (l.getNaam().equals(naam)) {
+				return l;
+			}
+		}
+		
+		return null;
+	}
 
 	public String login(String gebruikersnaam, String wachtwoord) {
 		for (Docent d : deDocenten) {
@@ -184,13 +228,12 @@ public class PrIS {
 	}
 	private void vulDocenten(ArrayList<Docent> pDocenten) {
 		String csvFile = "././CSV/docenten.csv";
-		BufferedReader br = null;
+		
 		String line = "";
 		String cvsSplitBy = ",";
 			
-		try {
-	
-			br = new BufferedReader(new FileReader(csvFile));
+		try(BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+
 			while ((line = br.readLine()) != null) {
 	
 			        // use comma as separator
@@ -209,15 +252,7 @@ public class PrIS {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} finally {
-			if (br != null) {
-				try {
-					br.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		} 
 	}
 
 	private void vulKlassen(ArrayList<Klas> pKlassen) {
@@ -285,7 +320,7 @@ public class PrIS {
 		}
 	}	
 	
-	private void vulLessen(ArrayList<Les> pLessen){
+	private void vulLokalen(ArrayList<Lokaal> pLokalen){
 		String csvFile = "././CSV/rooster.csv";
 		String line = "";
 		String cvsSplitBy = ",";
@@ -297,12 +332,10 @@ public class PrIS {
 	
 			        // use comma as separator
 				String[] element = line.split(cvsSplitBy);
-				String dag = element[0];
-				String beginTijd = element[1];
-				String eindTijd = element[2];
-				pLessen.add(new Les(code, naam));
+				String naam = element[5];
 				
-				//System.out.println(gebruikersnaam);
+				if (getLokaalViaNaam(naam) == null)
+					pLokalen.add(new Lokaal(naam));
 		
 			}
 	
@@ -328,6 +361,41 @@ public class PrIS {
 				String code = element[0];
 				String naam = element[1];
 				pVakken.add(new Vak(code, naam));
+				
+				//System.out.println(gebruikersnaam);
+		
+			}
+	
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+	}
+	
+	private void vulLessen(ArrayList<Les> pLessen){
+		String csvFile = "././CSV/rooster.csv";
+		String line = "";
+		String cvsSplitBy = ",";
+			
+		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))){
+	
+			
+			while ((line = br.readLine()) != null) {
+	
+			        // use comma as separator
+				String[] element = line.split(cvsSplitBy);
+				String dag = element[0];
+				String beginTijd = element[1];
+				String eindTijd = element[2];
+				
+				Calendar beginDatum = Calendar.getInstance();
+				Calendar eindDatum = Calendar.getInstance();
+				SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy hh:mm", Locale.GERMANY);
+				beginDatum.setTime(sdf.parse(dag+" "+beginTijd));
+				eindDatum.setTime(sdf.parse(dag+" "+eindTijd));
+				
+				pLessen.add(new Les(Vak, Klas, Docent, Lokaal, beginDatum, eindDatum));
 				
 				//System.out.println(gebruikersnaam);
 		
