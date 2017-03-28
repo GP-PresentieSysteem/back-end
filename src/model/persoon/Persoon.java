@@ -5,7 +5,7 @@ public abstract class Persoon {
 	private String voornaam;
 	private String tussenvoegsel;
 	private String achternaam;
-	private String wachtwoord;
+	private transient String wachtwoord;
 	private String gebruikersnaam;
 	//private Status status;
 

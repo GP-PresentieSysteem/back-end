@@ -1,12 +1,8 @@
 package controller;
 
-import javax.json.Json;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonBuilderFactory;
-import javax.json.JsonObject;
-import javax.json.JsonObjectBuilder;
-
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import model.PrIS;
 import model.klas.Klas;
@@ -43,12 +39,12 @@ public class PersoonController implements Handler{
 		
 	}
 	
-	//Print op dit moment alle klassen met namen uit in json
+	//Print op dit moment het rooster uit in json
 	private void gegevensOphalen(Conversation conversation){
 		Gson gson = new Gson();
 		String jsonOut = "";
 		
-		jsonOut = gson.toJson(informatieSysteem.getKlassen()); 
+		jsonOut = gson.toJson(informatieSysteem.getRooster()); 
 		
 		conversation.sendJSONMessage(jsonOut);		
 	}

@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 public class Rooster {
 	private ArrayList<Les> alleLessen = new ArrayList<Les>();
+	
+	public Rooster(ArrayList<Les> alleLessen){
+		this.alleLessen = alleLessen;
+	}
 
 	public ArrayList<Les> getAlleLessen() {
 		return alleLessen;

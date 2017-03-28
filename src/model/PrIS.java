@@ -8,6 +8,7 @@ import model.persoon.Status;
 import model.persoon.Student;
 import model.rooster.Les;
 import model.rooster.Lokaal;
+import model.rooster.Rooster;
 import model.vak.Vak;
 
 import java.io.BufferedReader;
@@ -30,6 +31,7 @@ public class PrIS {
 	private ArrayList<Vak> deVakken;
 	private ArrayList<Les> deLessen;
 	private ArrayList<Status> deStatussen;
+	private Rooster hetRooster;
 	
 	
 	/**
@@ -84,6 +86,8 @@ public class PrIS {
 		
 		//Inladen statussen
 		vulStatussen(deStatussen);
+		
+		hetRooster = new Rooster(deLessen);
 	
 	} //Einde Pris constructor
 	
@@ -159,6 +163,10 @@ public class PrIS {
 	
 	public ArrayList<Klas> getKlassen(){
 		return deKlassen;
+	}
+	
+	public Rooster getRooster(){
+		return hetRooster;
 	}
 	
 	public Student getStudent(String pGebruikersnaam) {

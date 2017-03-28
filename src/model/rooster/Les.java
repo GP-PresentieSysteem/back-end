@@ -7,7 +7,8 @@ import model.vak.Vak;
 
 public class Les {
 	private Vak huidigeVak;
-	private Klas huidigeKlas;
+	private transient Klas huidigeKlas;
+	private String klasCode;
 	private Docent huidigeDocent;
 	private Lokaal huidigeLokaal;
 	private Calendar beginTijd;
@@ -16,6 +17,7 @@ public class Les {
 	public Les(Vak hV, Klas hK, Docent hD, Lokaal hL, Calendar bT, Calendar eT){
 		huidigeVak = hV;
 		huidigeKlas = hK;
+		klasCode = hK.getKlasCode();
 		huidigeDocent = hD;
 		huidigeLokaal = hL;
 		beginTijd = bT;
