@@ -66,6 +66,9 @@ public class PrIS {
 		deLessen = new ArrayList<Les>();
 		deStatussen = new ArrayList<Status>();
 
+		//Inladen statussen
+		vulStatussen(deStatussen);
+		
 		// Inladen klassen
 		vulKlassen(deKlassen);
 
@@ -83,9 +86,6 @@ public class PrIS {
 		
 		// Inladen lessen
 		vulLessen(deLessen);
-		
-		//Inladen statussen
-		vulStatussen(deStatussen);
 		
 		hetRooster = new Rooster(deLessen);
 	
@@ -167,6 +167,10 @@ public class PrIS {
 	
 	public Rooster getRooster(){
 		return hetRooster;
+	}
+	
+	public ArrayList<Status> getStatussen(){
+		return deStatussen;
 	}
 	
 	public Student getStudent(String pGebruikersnaam) {
@@ -252,7 +256,9 @@ public class PrIS {
 				String voornaam = element[1];
 				String tussenvoegsel = element[2];
 				String achternaam = element[3];
-				pDocenten.add(new Docent(voornaam, tussenvoegsel, achternaam, "geheim", gebruikersnaam, 1));
+				
+				//deStatussen.get(0) = standaard aanwezig
+				pDocenten.add(new Docent(voornaam, tussenvoegsel, achternaam, "geheim", gebruikersnaam, deStatussen.get(0), 1));
 				
 				//System.out.println(gebruikersnaam);
 		
@@ -305,7 +311,9 @@ public class PrIS {
 					gebruikersnaam = gebruikersnaam.replace(" ","");
 					String lStudentNrString  = element[0];
 					int lStudentNr = Integer.parseInt(lStudentNrString);
-					lStudent = new Student(element[3], element[2], element[1], "geheim", gebruikersnaam, lStudentNr); //Volgorde 3-2-1 = voornaam, tussenvoegsel en achternaam
+					
+					//deStatussen.get(0) = standaard aanwezig
+					lStudent = new Student(element[3], element[2], element[1], "geheim", gebruikersnaam, deStatussen.get(0), lStudentNr, "V1D"); //Volgorde 3-2-1 = voornaam, tussenvoegsel en achternaam
 					pStudenten.add(lStudent);
 					k.voegStudentToe(lStudent);
 					

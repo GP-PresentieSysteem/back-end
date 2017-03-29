@@ -42,13 +42,20 @@ public class Application {
 
 		server.registerHandler("/login", loginController);
 
+		//Studenten
   	server.registerHandler("/student/medestudenten/ophalen", medestudentenController);
   	server.registerHandler("/student/medestudenten/opslaan", medestudentenController);
   	
   	server.registerHandler("/rooster", roosterController);
   	server.registerHandler("/rooster/les", roosterController);
   	
+  	//Docenten
+  	server.registerHandler("/rooster/klas", roosterController);
+  	
   	server.registerHandler("/persoon/info", persoonController);
+  	
+  	//Admin
+  	server.registerHandler("/personen/info", persoonController);
 		
 		server.start();
 	}
