@@ -313,7 +313,7 @@ public class PrIS {
 					int lStudentNr = Integer.parseInt(lStudentNrString);
 					
 					//deStatussen.get(0) = standaard aanwezig
-					lStudent = new Student(element[3], element[2], element[1], "geheim", gebruikersnaam, deStatussen.get(0), lStudentNr, "V1D"); //Volgorde 3-2-1 = voornaam, tussenvoegsel en achternaam
+					lStudent = new Student(element[3], element[2], element[1], "geheim", gebruikersnaam, deStatussen.get(0), lStudentNr, k.getNaam()); //Volgorde 3-2-1 = voornaam, tussenvoegsel en achternaam
 					pStudenten.add(lStudent);
 					k.voegStudentToe(lStudent);
 					

@@ -12,10 +12,11 @@ public class KlasController implements Handler{
 	}
 	
 	public void handle(Conversation conversation) {
-
+		
+		
 	}
 	
 	private void ophalenKlas(Conversation conversation){
-		
+		informatieSysteem.getKlassen();
 	}
 }

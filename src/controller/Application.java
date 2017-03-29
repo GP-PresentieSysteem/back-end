@@ -33,29 +33,33 @@ public class Application {
 		
 		SysteemDatumController systeemDatumController = new SysteemDatumController(infoSysteem);
 		LoginController loginController = new LoginController(infoSysteem);
-		MedestudentenController medestudentenController = new MedestudentenController(infoSysteem);
 		RoosterController roosterController = new RoosterController(infoSysteem);
 		PersoonController persoonController = new PersoonController(infoSysteem);
+		KlasController klasController = new KlasController(infoSysteem);
 		
 		//Server paths
 		server.registerHandler("/systeemdatum/lesinfo", systeemDatumController);
 
 		server.registerHandler("/login", loginController);
-
-		//Studenten
-  	server.registerHandler("/student/medestudenten/ophalen", medestudentenController);
-  	server.registerHandler("/student/medestudenten/opslaan", medestudentenController);
+		
+  	server.registerHandler("/persoon/info", persoonController);
+  	server.registerHandler("/persoon/zetstatus", persoonController);
   	
-  	server.registerHandler("/rooster", roosterController);
   	server.registerHandler("/rooster/les", roosterController);
+
+		//Studenten  	
+  	server.registerHandler("/rooster/student", roosterController);
   	
   	//Docenten
-  	server.registerHandler("/rooster/klas", roosterController);
-  	
-  	server.registerHandler("/persoon/info", persoonController);
+  	server.registerHandler("/rooster/docent", roosterController);
+  	server.registerHandler("/klas/slb", klasController);
+  	server.registerHandler("/klas/info", klasController);
   	
   	//Admin
-  	server.registerHandler("/personen/info", persoonController);
+  	server.registerHandler("/docenten/info", persoonController);
+  	server.registerHandler("/studenten/info", persoonController);
+  	server.registerHandler("/roosters/overzicht", roosterController);
+  	server.registerHandler("/klassen/info", klasController);
 		
 		server.start();
 	}
