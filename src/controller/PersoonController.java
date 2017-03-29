@@ -44,7 +44,7 @@ public class PersoonController implements Handler{
 		Gson gson = new Gson();
 		String jsonOut = "";
 		
-		jsonOut = gson.toJson(informatieSysteem.getStatussen()); 
+		jsonOut = gson.toJson(informatieSysteem.getRooster()); 
 		
 		conversation.sendJSONMessage(jsonOut);		
 	}

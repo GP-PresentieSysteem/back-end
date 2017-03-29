@@ -3,16 +3,12 @@ package model.persoon;
 public class Status {
 	private String naam;
 	
-	public Status(String nm){
-		naam = nm;
+	public Status(String naam){
+		this.naam = naam;
 		
 	}
 
-	public String getNaam() {
+	public String getStatus() {
 		return naam;
-	}
-
-	public void setNaam(String naam) {
-		this.naam = naam;
 	}
 }
