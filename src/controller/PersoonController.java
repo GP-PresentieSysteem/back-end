@@ -1,5 +1,4 @@
 package controller;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -18,34 +17,62 @@ public class PersoonController implements Handler{
 	}
 	
 	public void handle(Conversation conversation) {
-	  if (conversation.getRequestedURI().startsWith("/persoon/status")) {
+	  if (conversation.getRequestedURI().startsWith("/persoon/zetstatus")) {
 	  	zetStatus(conversation);
 		}
 	  
 		if (conversation.getRequestedURI().startsWith("/persoon/info")) {
-			gegevensOphalen(conversation);
+			persoonInfo(conversation);
+		}
+		
+		if (conversation.getRequestedURI().startsWith("/studenten/info")) {
+			alleStudenten(conversation);
+		}
+		
+		if (conversation.getRequestedURI().startsWith("/docenten/info")) {
+			alleDocenten(conversation);
 		}
 	}
 	
 	private void zetStatus(Conversation conversation) {
 		
+
 	}
 	
-	private void afmelden(Conversation conversation){
+	private void persoonInfo(Conversation conversation){
+		JsonParser parser = new JsonParser();
+		Gson gson = new Gson();
 		
-	}
-	
-	private void aanmelden(Conversation conversation){
+		JsonObject request = parser.parse(conversation.getRequestBodyAsString()).getAsJsonObject();
 		
+		//request.get("naam").getAsString();
+		Student student = informatieSysteem.getStudent(request.get("naam").getAsString());
+		
+		if (student != null) {
+			conversation.sendJSONMessage(gson.toJson(student));
+			return;
+		}
+
+		String jsonOut = "";
+		
+		conversation.sendJSONMessage(request.get("naam").getAsString());
 	}
 	
-	//Print op dit moment het rooster uit in json
-	private void gegevensOphalen(Conversation conversation){
+	private void alleStudenten(Conversation conversation){
 		Gson gson = new Gson();
 		String jsonOut = "";
 		
-		jsonOut = gson.toJson(informatieSysteem.getRooster()); 
+		jsonOut = gson.toJson(informatieSysteem.getStudenten()); 
 		
-		conversation.sendJSONMessage(jsonOut);		
+		conversation.sendJSONMessage(jsonOut);
+	}
+	
+	private void alleDocenten(Conversation conversation){
+		Gson gson = new Gson();
+		String jsonOut = "";
+		
+		jsonOut = gson.toJson(informatieSysteem.getDocenten()); 
+		
+		conversation.sendJSONMessage(jsonOut);
 	}
 }

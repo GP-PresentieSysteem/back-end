@@ -220,6 +220,14 @@ public class PrIS {
 		
 		return null;
 	}
+	
+	public ArrayList<Student> getStudenten(){
+		return deStudenten;
+	}
+	
+	public ArrayList<Docent> getDocenten(){
+		return deDocenten;
+	}
 
 	public String login(String gebruikersnaam, String wachtwoord) {
 		for (Docent d : deDocenten) {
@@ -240,6 +248,7 @@ public class PrIS {
 		
 		return "undefined";
 	}
+	
 	private void vulDocenten(ArrayList<Docent> pDocenten) {
 		String csvFile = "././CSV/docenten.csv";
 		
