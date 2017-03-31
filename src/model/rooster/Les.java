@@ -28,6 +28,10 @@ public class Les {
 		return huidigeVak;
 	}
 
+	public String klasCode(){
+		return klasCode;
+	}
+	
 	public void setHuidigeVak(Vak huidigeVak) {
 		this.huidigeVak = huidigeVak;
 	}
@@ -35,7 +39,7 @@ public class Les {
 	public Klas getHuidigeKlas() {
 		return huidigeKlas;
 	}
-
+	
 	public void setHuidigeKlas(Klas huidigeKlas) {
 		this.huidigeKlas = huidigeKlas;
 	}
