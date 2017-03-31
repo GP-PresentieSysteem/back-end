@@ -9,13 +9,13 @@ public abstract class Persoon {
 	private String gebruikersnaam;
 	private Status status;
 
-	public Persoon(String voornaam, String tussenvoegsel, String achternaam, String wachtwoord, String gebruikersnaam, Status status) {
+	public Persoon(String voornaam, String tussenvoegsel, String achternaam, String wachtwoord, String gebruikersnaam) {
 		this.voornaam = voornaam;
 		this.tussenvoegsel = tussenvoegsel;
 		this.achternaam = achternaam;
 		this.wachtwoord = wachtwoord;
 		this.gebruikersnaam = gebruikersnaam;
-		this.status = status;
+		this.status = new Status("Aanwezig");
 	}
 
 	public String getVoornaam() {

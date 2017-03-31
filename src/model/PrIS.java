@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import model.klas.Klas;
 import model.persoon.Docent;
-import model.persoon.Status;
 import model.persoon.Student;
 import model.rooster.Les;
 import model.rooster.Lokaal;
@@ -30,7 +29,6 @@ public class PrIS {
 	private ArrayList<Lokaal> deLokalen;
 	private ArrayList<Vak> deVakken;
 	private ArrayList<Les> deLessen;
-	private ArrayList<Status> deStatussen;
 	private Rooster hetRooster;
 	
 	
@@ -64,10 +62,6 @@ public class PrIS {
 		deLokalen = new ArrayList<Lokaal>();
 		deVakken = new ArrayList<Vak>();
 		deLessen = new ArrayList<Les>();
-		deStatussen = new ArrayList<Status>();
-
-		//Inladen statussen
-		vulStatussen(deStatussen);
 		
 		// Inladen klassen
 		vulKlassen(deKlassen);
@@ -168,11 +162,7 @@ public class PrIS {
 	public Rooster getRooster(){
 		return hetRooster;
 	}
-	
-	public ArrayList<Status> getStatussen(){
-		return deStatussen;
-	}
-	
+
 	public Student getStudent(String pGebruikersnaam) {
 		// used
 		Student lGevondenStudent = null;
@@ -267,7 +257,7 @@ public class PrIS {
 				String achternaam = element[3];
 				
 				//deStatussen.get(0) = standaard aanwezig
-				pDocenten.add(new Docent(voornaam, tussenvoegsel, achternaam, "geheim", gebruikersnaam, deStatussen.get(0), 1));
+				pDocenten.add(new Docent(voornaam, tussenvoegsel, achternaam, "geheim", gebruikersnaam, 1));
 				
 				//System.out.println(gebruikersnaam);
 		
@@ -322,7 +312,7 @@ public class PrIS {
 					int lStudentNr = Integer.parseInt(lStudentNrString);
 					
 					//deStatussen.get(0) = standaard aanwezig
-					lStudent = new Student(element[3], element[2], element[1], "geheim", gebruikersnaam, deStatussen.get(0), lStudentNr, k.getNaam()); //Volgorde 3-2-1 = voornaam, tussenvoegsel en achternaam
+					lStudent = new Student(element[3], element[2], element[1], "geheim", gebruikersnaam, lStudentNr, k.getNaam()); //Volgorde 3-2-1 = voornaam, tussenvoegsel en achternaam
 					pStudenten.add(lStudent);
 					k.voegStudentToe(lStudent);
 					
@@ -440,30 +430,5 @@ public class PrIS {
 			e.printStackTrace();
 		} 
 	}
-	
-	private void vulStatussen(ArrayList<Status> pStatussen){
-		String csvFile = "././CSV/statussen.csv";
-		String line = "";
-		String cvsSplitBy = ",";
-			
-		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))){
-	
-			
-			while ((line = br.readLine()) != null) {
-	
-			        // use comma as separator
-				String[] element = line.split(cvsSplitBy);
-				String naam = element[0];
-				pStatussen.add(new Status(naam));
-		
-			}
-	
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} 
-	}
-
 
 }

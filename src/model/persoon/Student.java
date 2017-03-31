@@ -12,7 +12,6 @@ public class Student extends Persoon {
 		String pAchternaam, 
 		String pWachtwoord, 
 		String pGebruikersnaam,
-		Status pStatus,
 		int pStudentNummer,
 		String groepId) {
 		super(
@@ -20,8 +19,7 @@ public class Student extends Persoon {
 			pTussenvoegsel, 
 			pAchternaam, 
 			pWachtwoord, 
-			pGebruikersnaam,
-			pStatus);
+			pGebruikersnaam);
 		this.setStudentNummer(pStudentNummer);
 		this.setGroepId(groepId);
 	}

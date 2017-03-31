@@ -37,7 +37,6 @@ public class PersoonController implements Handler{
 	
 	private void zetStatus(Conversation conversation) {
 		
-
 	}
 	
 	private void persoonInfo(Conversation conversation){
