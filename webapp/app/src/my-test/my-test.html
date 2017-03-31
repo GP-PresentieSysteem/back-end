@@ -1,0 +1,75 @@
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-styles/typography.html">
+<link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
+
+<dom-module id="my-test">
+  <template>
+    <style>
+
+    </style>
+
+
+    <paper-button
+      id="test_button"
+      class="my-button"
+      on-click="test_button_handler"
+      raised>
+        Test
+    </paper-button>
+
+    <iron-ajax
+      id="ajax_test"
+      method="POST"
+      url="/persoon/info"
+      handle-as="json"
+      on-response="ajax_test_handler">
+    </iron-ajax>
+
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+
+      /* _xxxx private              : geen external data binding      - geen notify
+         _c_xx private constant     : geen external binding, constant - geen notify
+         c_xx  public constant      : one way external databinding [[c_xx]] - geen notify nodig
+         xxxx  public               : two way external databinding {{xxxx}} - notify nodig
+      */
+      Polymer({
+        is: 'my-test',
+
+        properties: {
+          gebruikersnaam: {
+            type: String,
+            value: "stefan.deraadt@student.hu.nl",
+          },
+        },
+
+         test_button_handler: function() {
+          console.log("test_button_handler=" + this.naam);
+          this.$.ajax_test.contentType="application/json";
+          this.$.ajax_test.body={
+            "gebruikersnaam":this.gebruikersnaam
+          };
+          this.$.ajax_test.generateRequest();
+        },
+
+        ajax_test_handler: function(request) {
+          console.log(request.detail.response);
+          this.gebruikersnaam = request.detail.response.gebruikersnaam;
+          console.log(this.gebruikersnaam);
+
+        },
+
+      });
+
+    })();
+  </script>
+</dom-module>

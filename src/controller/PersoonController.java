@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 
 import model.PrIS;
 import model.klas.Klas;
+import model.persoon.Docent;
 import model.persoon.Student;
 import server.Conversation;
 import server.Handler;
@@ -43,19 +44,46 @@ public class PersoonController implements Handler{
 		JsonParser parser = new JsonParser();
 		Gson gson = new Gson();
 		
-		JsonObject request = parser.parse(conversation.getRequestBodyAsString()).getAsJsonObject();
+		System.out.println(conversation.getRequestBodyAsString());
 		
-		//request.get("naam").getAsString();
-		Student student = informatieSysteem.getStudent(request.get("naam").getAsString());
+		try {
+			JsonObject request = parser.parse(conversation.getRequestBodyAsString()).getAsJsonObject();
+			
+			if (request.get("gebruikersnaam") != null){
+				
+				if (informatieSysteem.getStudent(request.get("gebruikersnaam").getAsString()) != null){
+					Student student = informatieSysteem.getStudent(request.get("gebruikersnaam").getAsString());
+					
+					conversation.sendJSONMessage(gson.toJson(student));
+					
+					return;
+				}
+				
+				if (informatieSysteem.getDocent(request.get("gebruikersnaam").getAsString()) != null){
+					Docent docent = informatieSysteem.getDocent(request.get("gebruikersnaam").getAsString());
+					
+					conversation.sendJSONMessage(gson.toJson(docent));
+					
+					return;
+				}
+				
+				
+			}
+			
+			if (request.get("studentNummer") != null){
+				if (informatieSysteem.getStudent(request.get("naam").getAsInt()) != null){
+					Student student = informatieSysteem.getStudent(request.get("naam").getAsInt());
+					
+					conversation.sendJSONMessage(gson.toJson(student));
+					
+					return;
+				}
+			}
+    } catch (Exception ex) {
+    	ex.printStackTrace();
+    }
 		
-		if (student != null) {
-			conversation.sendJSONMessage(gson.toJson(student));
-			return;
-		}
-
-		String jsonOut = "";
-		
-		conversation.sendJSONMessage(request.get("naam").getAsString());
+		conversation.sendJSONMessage("{'error':'Geen persoon gevonden'}");
 	}
 	
 	private void alleStudenten(Conversation conversation){
