@@ -1,24 +1,48 @@
 package model.persoon;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 
 public class Status {
-	private String naam;
-	private Calendar van;
-	private Calendar tot;
+	private String status;
+	private LocalDate datum;
+	private String dagdeel;
 	
-	public Status(String naam){
-		this.naam = naam;
+	public Status(String status){
+		this.status = status;
+		this.dagdeel = "";
+	}
+	
+	public Status (String status, LocalDate datum, String dagdeel){
+		this.status = status;
+		this.datum = datum;
+		this.dagdeel = dagdeel;
+	}
+	
+	public String getStatus(){
+		return this.status;
+	}
+	
+	public LocalDate getDatum(){
+		return this.datum;
+	}
+	
+	public String getDagdeel(){
+		return this.dagdeel;
+	}
+	
+	public boolean equals(Object obj){
 		
-	}
-	
-	public Status (String naam, Calendar van, Calendar tot){
-		this.naam = naam;
-		this.van = van;
-		this.tot = tot;
-	}
-
-	public String getStatus() {
-		return naam;
+		if(obj instanceof Status){
+			Status andereStatus = (Status)obj;
+			
+			System.out.println(dagdeel);
+			System.out.println(andereStatus.getDagdeel());
+			
+			if(status.equals(andereStatus.getStatus()) &&
+				 datum == andereStatus.getDatum() &&
+				 dagdeel.equals(andereStatus.getDagdeel())) return true;
+		}
+		
+		return false;
 	}
 }

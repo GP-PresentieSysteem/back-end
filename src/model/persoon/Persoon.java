@@ -1,5 +1,9 @@
 package model.persoon;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public abstract class Persoon {
 
 	private String voornaam;
@@ -7,7 +11,7 @@ public abstract class Persoon {
 	private String achternaam;
 	private transient String wachtwoord;
 	private String gebruikersnaam;
-	private Status status;
+	private ArrayList<Status> statussen;
 
 	public Persoon(String voornaam, String tussenvoegsel, String achternaam, String wachtwoord, String gebruikersnaam) {
 		this.voornaam = voornaam;
@@ -15,7 +19,7 @@ public abstract class Persoon {
 		this.achternaam = achternaam;
 		this.wachtwoord = wachtwoord;
 		this.gebruikersnaam = gebruikersnaam;
-		this.status = new Status("Aanwezig");
+		this.statussen = new ArrayList<Status>();
 	}
 
 	public String getVoornaam() {
@@ -32,6 +36,28 @@ public abstract class Persoon {
 
 	public String getGebruikersnaam() {
 		return this.gebruikersnaam;
+	}
+	
+	public void ziekMelden(){
+		statussen.add(new Status("Ziek"));
+	}
+	
+	public void beterMelden(){
+		for (int i = 0; i < statussen.size(); i ++) {
+			if(statussen.get(i).getStatus().equals("Ziek")){
+				statussen.remove(i);
+			}
+		}
+	}
+	
+	public void nieuweStatus(String naam, LocalDate datum, String dagdeel){
+		Status status = new Status(naam, datum, dagdeel);
+		
+		for (Status s : statussen) {
+  		if(s.equals(status)) return;
+		}
+		
+		statussen.add(status);
 	}
 
 	public String getVolledigeAchternaam() {

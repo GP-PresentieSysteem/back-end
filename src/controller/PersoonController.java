@@ -1,4 +1,8 @@
 package controller;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -36,7 +40,89 @@ public class PersoonController implements Handler{
 	}
 	
 	private void zetStatus(Conversation conversation) {
+		JsonParser parser = new JsonParser();
+		Gson gson = new Gson();
 		
+		System.out.println(conversation.getRequestBodyAsString());
+		
+		try {
+			JsonObject request = parser.parse(conversation.getRequestBodyAsString()).getAsJsonObject();
+			
+			if (request.get("gebruikersnaam") != null && request.get("status") != null){
+				String status = request.get("status").getAsString();
+				
+        switch (status) {
+          case "Aanwezig":  
+    				if (informatieSysteem.getStudent(request.get("gebruikersnaam").getAsString()) != null){
+    					Student student = informatieSysteem.getStudent(request.get("gebruikersnaam").getAsString());
+    					
+    					student.beterMelden();
+    					
+    					return;
+    				}
+    				
+    				if (informatieSysteem.getDocent(request.get("gebruikersnaam").getAsString()) != null){
+    					Docent docent = informatieSysteem.getDocent(request.get("gebruikersnaam").getAsString());
+    					
+    					docent.beterMelden();
+    					
+    					return;
+    				}
+          	break;
+          	
+          case "Ziek":  
+    				if (informatieSysteem.getStudent(request.get("gebruikersnaam").getAsString()) != null){
+    					Student student = informatieSysteem.getStudent(request.get("gebruikersnaam").getAsString());
+    					
+    					student.ziekMelden();
+    					
+    					return;
+    				}
+    				
+    				if (informatieSysteem.getDocent(request.get("gebruikersnaam").getAsString()) != null){
+    					Docent docent = informatieSysteem.getDocent(request.get("gebruikersnaam").getAsString());
+    					
+    					docent.ziekMelden();
+    					
+    					return;
+    				}
+          	break;
+          	
+          case "Afwezig": 
+          	if (request.get("datum") != null && request.get("dagdeel") != null){
+            	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+      				formatter = formatter.withLocale( Locale.GERMANY );
+      				LocalDate date = LocalDate.parse(request.get("datum").getAsString(), formatter);
+            	
+      				if (informatieSysteem.getStudent(request.get("gebruikersnaam").getAsString()) != null){
+      					Student student = informatieSysteem.getStudent(request.get("gebruikersnaam").getAsString());
+      					
+      					student.nieuweStatus(status, date, request.get("dagdeel").getAsString());
+      					
+      					return;
+      				}
+      				
+      				if (informatieSysteem.getDocent(request.get("gebruikersnaam").getAsString()) != null){
+      					Docent docent = informatieSysteem.getDocent(request.get("gebruikersnaam").getAsString());
+      					
+      					docent.nieuweStatus(status, date, request.get("dagdeel").getAsString());
+      					
+      					return;
+      				}
+          	}else{
+          		conversation.sendJSONMessage("{\"error\":\"Geen datum of dagdeel gevonden\"}");
+          	}
+          	break;
+          	
+    			default: 
+    				conversation.sendJSONMessage("{\"error\":\"Status bestaat niet\"}");
+
+          	break;
+        }
+			}
+    } catch (Exception ex) {
+    	ex.printStackTrace();
+    }
 	}
 	
 	private void persoonInfo(Conversation conversation){
