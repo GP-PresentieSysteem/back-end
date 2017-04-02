@@ -26,7 +26,7 @@
     <iron-ajax
       id="ajax_test"
       method="POST"
-      url="/persoon/info"
+      url="/persoon/zetstatus"
       handle-as="json"
       on-response="ajax_test_handler">
     </iron-ajax>
@@ -56,7 +56,10 @@
           console.log("test_button_handler=" + this.naam);
           this.$.ajax_test.contentType="application/json";
           this.$.ajax_test.body={
-            "gebruikersnaam":this.gebruikersnaam
+            "gebruikersnaam":"stefan.deraadt@student.hu.nl",
+            "status":"afwezig",
+            "dagDeel":"middag",
+            "datum":"02-03-2017"
           };
           this.$.ajax_test.generateRequest();
         },
