@@ -40,7 +40,7 @@ public class KlasController implements Handler{
 		
 		jsonOut = gson.toJson(informatieSysteem.getKlassen()); //hardcoded een klas, als voorbeeld
 		
-		conversation.sendJSONMessage(jsonOut);		
+		conversation.sendJSONMessage(jsonOut);
 
 	}
 	
