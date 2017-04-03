@@ -69,11 +69,22 @@ public class KlasController implements Handler{
 	private void ophalenKlas(Conversation conversation){
 		Gson gson = new Gson();
 		JsonParser parser = new JsonParser();
-	  JsonObject request = parser.parse(conversation.getRequestBodyAsString()).getAsJsonObject();
-	  System.out.println(request.get("klascode").getAsString());
-		String jsonOut = "";
-		System.out.println(conversation.getRequestBodyAsString());
 		
-		jsonOut = gson.toJson(informatieSysteem.getKlas("V1D")); 
+		if (conversation.getRequestBodyAsString() == null){
+			conversation.sendJSONMessage("{\"error\":\"Geen json data mee gegeven\"}");
+			
+			return;
+		}
+		
+	  JsonObject request = parser.parse(conversation.getRequestBodyAsString()).getAsJsonObject();
+		String jsonOut = "";
+
+		if(informatieSysteem.getKlas(request.get("klascode").getAsString()) != null){
+			jsonOut = gson.toJson(informatieSysteem.getKlas(request.get("klascode").getAsString())); 
+		}else{
+			jsonOut = "{\"error\":\"Klas niet gevonden\"}";
+		}
+		
+		conversation.sendJSONMessage(jsonOut);
 	}
 }

@@ -12,6 +12,7 @@ public abstract class Persoon {
 	private transient String wachtwoord;
 	private String gebruikersnaam;
 	private ArrayList<Status> statussen;
+	private boolean ziek;
 
 	public Persoon(String voornaam, String tussenvoegsel, String achternaam, String wachtwoord, String gebruikersnaam) {
 		this.voornaam = voornaam;
@@ -20,6 +21,7 @@ public abstract class Persoon {
 		this.wachtwoord = wachtwoord;
 		this.gebruikersnaam = gebruikersnaam;
 		this.statussen = new ArrayList<Status>();
+		this.ziek=false;
 	}
 
 	public String getVoornaam() {
@@ -39,15 +41,11 @@ public abstract class Persoon {
 	}
 	
 	public void ziekMelden(){
-		statussen.add(new Status("Ziek"));
+		ziek=true;
 	}
 	
 	public void beterMelden(){
-		for (int i = 0; i < statussen.size(); i ++) {
-			if(statussen.get(i).getStatus().equals("Ziek")){
-				statussen.remove(i);
-			}
-		}
+		ziek=false;
 	}
 	
 	public void nieuweStatus(String naam, LocalDate datum, String dagdeel){

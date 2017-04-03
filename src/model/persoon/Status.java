@@ -35,9 +35,6 @@ public class Status {
 		if(obj instanceof Status){
 			Status andereStatus = (Status)obj;
 			
-			System.out.println(dagdeel);
-			System.out.println(andereStatus.getDagdeel());
-			
 			if(status.equals(andereStatus.getStatus()) &&
 				 datum == andereStatus.getDatum() &&
 				 dagdeel.equals(andereStatus.getDagdeel())) return true;

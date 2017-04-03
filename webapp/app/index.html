@@ -94,7 +94,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </script>
 
+    <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+    <link rel="import" href="../bower_components/paper-button/paper-button.html">
+    <link rel="import" href="../../bower_components/paper-input/paper-input.html">
+
+    <link rel="import" href="/src/my-klas.html">
     <link rel="import" href="/src/my-student.html"> <!-- gewijzigd tov PSK  -->
+
 <!--  <link rel="import" href="/src/my-app/my-app.html"> -->
     <style>
       body {
@@ -107,18 +113,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         background-color: #fafafa;  /*ligth gray background empty canvas
 /*   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif; */
        color: #333;
-}
-
+    }
     </style>
   </head>
   <body>
     <!--<my-app></my-app> -->
-
-    <my-student gebruikersnaam="stefan.deraadt@student.hu.nl"></my-student>
+    <my-klas klascode="TICT-SIE-V1D"></my-klas>
+    <!--<my-student gebruikersnaam="stefan.deraadt@student.hu.nl"></my-student>
     <my-student gebruikersnaam="jan.dekkers@student.hu.nl"></my-student>
     <my-student gebruikersnaam="chung.wong@student.hu.nl"></my-student>
     <my-student gebruikersnaam="thomas.mocellin@student.hu.nl"></my-student>
-    <my-student gebruikersnaam="bart.vanstraaten@student.hu.nl"></my-student>
+    <my-student gebruikersnaam="bart.vanstraaten@student.hu.nl"></my-student>-->
     <!-- Built with love using Polymer Starter Kit -->
   </body>
 </html>

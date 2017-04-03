@@ -58,11 +58,13 @@ public class PersoonController implements Handler{
 				String status = request.get("status").getAsString();
 				
         switch (status) {
-          case "Aanwezig":  
+          case "Beter":  
     				if (informatieSysteem.getStudent(request.get("gebruikersnaam").getAsString()) != null){
     					Student student = informatieSysteem.getStudent(request.get("gebruikersnaam").getAsString());
     					
     					student.beterMelden();
+    					
+    					conversation.sendJSONMessage("{\"succes\":\"Status aangepast\"}");
     					
     					return;
     				}
@@ -71,6 +73,8 @@ public class PersoonController implements Handler{
     					Docent docent = informatieSysteem.getDocent(request.get("gebruikersnaam").getAsString());
     					
     					docent.beterMelden();
+    					
+    					conversation.sendJSONMessage("{\"succes\":\"Status aangepast\"}");
     					
     					return;
     				}
@@ -82,6 +86,8 @@ public class PersoonController implements Handler{
     					
     					student.ziekMelden();
     					
+    					conversation.sendJSONMessage("{\"succes\":\"Status aangepast\"}");
+    					
     					return;
     				}
     				
@@ -89,6 +95,8 @@ public class PersoonController implements Handler{
     					Docent docent = informatieSysteem.getDocent(request.get("gebruikersnaam").getAsString());
     					
     					docent.ziekMelden();
+    					
+    					conversation.sendJSONMessage("{\"succes\":\"Status aangepast\"}");
     					
     					return;
     				}
@@ -105,6 +113,8 @@ public class PersoonController implements Handler{
       					
       					student.nieuweStatus(status, date, request.get("dagdeel").getAsString());
       					
+      					conversation.sendJSONMessage("{\"succes\":\"Status aangepast\"}");
+      					
       					return;
       				}
       				
@@ -112,6 +122,8 @@ public class PersoonController implements Handler{
       					Docent docent = informatieSysteem.getDocent(request.get("gebruikersnaam").getAsString());
       					
       					docent.nieuweStatus(status, date, request.get("dagdeel").getAsString());
+      					
+      					conversation.sendJSONMessage("{\"succes\":\"Status aangepast\"}");
       					
       					return;
       				}
