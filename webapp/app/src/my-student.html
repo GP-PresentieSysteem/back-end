@@ -1,0 +1,62 @@
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+<dom-module id="my-student">
+  <template>
+    <style>
+
+    </style>
+
+    <p>{{student.voornaam}} {{student.tussenvoegsel}} {{student.achternaam}}</p>
+
+    <iron-ajax
+      id="ajax_student"
+      method="POST"
+      url="/persoon/info"
+      handle-as="json"
+      on-response="ajax_student_handler">
+    </iron-ajax>
+
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+
+      /* _xxxx private              : geen external data binding      - geen notify
+         _c_xx private constant     : geen external binding, constant - geen notify
+         c_xx  public constant      : one way external databinding [[c_xx]] - geen notify nodig
+         xxxx  public               : two way external databinding {{xxxx}} - notify nodig
+      */
+      Polymer({
+        is: 'my-student',
+
+        properties: {
+          student: {
+          },
+        },
+
+        student_button_handler: function() {
+          console.log("test");
+          this.$.ajax_student.contentType="application/json";
+          this.$.ajax_student.body={
+            "gebruikersnaam":"stefan.deraadt@student.hu.nl"
+          };
+          this.$.ajax_student.generateRequest();
+        },
+
+        ajax_student_handler: function(request) {
+          this.student = request.detail.response;
+
+          console.log(this.student);
+        },
+
+        ready: function() {
+          this.student_button_handler();
+        },
+
+      });
+
+    })();
+  </script>
+</dom-module>
