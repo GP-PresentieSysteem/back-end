@@ -141,6 +141,14 @@ public class PrIS {
 		return resultaat;
 	}
 	
+	//public Docent getSlber(String klascode) { //TBA
+		
+
+//		for(Klas k : deKlassen) {
+//			if()
+//		}
+//	}
+	
 	public Klas getKlasVanStudent(Student pStudent) {
 	  //used
 		for (Klas lKlas : deKlassen) {

@@ -38,6 +38,8 @@ public class Klas {
 		}
 		return false;
 	}
+	
+	
 
 	public void voegStudentToe(Student pStudent) {
 		if (!this.getStudenten().contains(pStudent)) {
