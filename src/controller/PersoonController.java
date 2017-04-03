@@ -45,6 +45,12 @@ public class PersoonController implements Handler{
 		
 		System.out.println(conversation.getRequestBodyAsString());
 		
+		if (conversation.getRequestBodyAsString() == null){
+			conversation.sendJSONMessage("{\"error\":\"Geen json data mee gegeven\"}");
+			
+			return;
+		}
+		
 		try {
 			JsonObject request = parser.parse(conversation.getRequestBodyAsString()).getAsJsonObject();
 			
@@ -129,7 +135,11 @@ public class PersoonController implements Handler{
 		JsonParser parser = new JsonParser();
 		Gson gson = new Gson();
 		
-		System.out.println(conversation.getRequestBodyAsString());
+		if (conversation.getRequestBodyAsString() == null){
+			conversation.sendJSONMessage("{\"error\":\"Geen json data mee gegeven\"}");
+			
+			return;
+		}
 		
 		try {
 			JsonObject request = parser.parse(conversation.getRequestBodyAsString()).getAsJsonObject();
@@ -168,7 +178,7 @@ public class PersoonController implements Handler{
     	ex.printStackTrace();
     }
 		
-		conversation.sendJSONMessage("{'error':'Geen persoon gevonden'}");
+		conversation.sendJSONMessage("{\"error\":\"Geen persoon gevonden\"}");
 	}
 	
 	private void alleStudenten(Conversation conversation){
