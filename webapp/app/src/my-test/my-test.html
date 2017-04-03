@@ -4,7 +4,10 @@
 <dom-module id="my-test">
   <template>
     <style>
+<<<<<<< HEAD
 
+=======
+>>>>>>> klas
     </style>
 
 
@@ -19,7 +22,11 @@
     <iron-ajax
       id="ajax_test"
       method="POST"
+<<<<<<< HEAD
       url="/persoon/zetstatus"
+=======
+      url="/klas/info"
+>>>>>>> klas
       handle-as="json"
       on-response="ajax_test_handler">
     </iron-ajax>
@@ -46,6 +53,7 @@
         },
 
          test_button_handler: function() {
+<<<<<<< HEAD
 
           this.$.ajax_test.contentType="application/json";
           this.$.ajax_test.body={
@@ -53,6 +61,12 @@
             "status":"afwezig",
             "dagDeel":"middag",
             "datum":"02-03-2017"
+=======
+          console.log("test_button_handler=" + this.naam);
+          this.$.ajax_test.contentType="application/json";
+          this.$.ajax_test.body={
+            "klascode": "V1D"
+>>>>>>> klas
           };
           this.$.ajax_test.generateRequest();
         },
