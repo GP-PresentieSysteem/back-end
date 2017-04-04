@@ -18,8 +18,6 @@
     <iron-ajax
       id="ajax_test"
       method="POST"
-      url="/persoon/zetstatus"
-      url="/klas/info"
       url="/rooster/student"
       handle-as="json"
       on-response="ajax_test_handler">
@@ -30,13 +28,7 @@
   <script>
     (function() {
       'use strict';
-
-      /* _xxxx private              : geen external data binding      - geen notify
-         _c_xx private constant     : geen external binding, constant - geen notify
-         c_xx  public constant      : one way external databinding [[c_xx]] - geen notify nodig
-         xxxx  public               : two way external databinding {{xxxx}} - notify nodig
-      */
-      Polymer({
+        Polymer({
         is: 'my-test',
 
         properties: {
@@ -47,13 +39,6 @@
         },
 
          test_button_handler: function() {
-          this.$.ajax_test.contentType="application/json";
-          this.$.ajax_test.body={
-            "gebruikersnaam":"stefan.deraadt@student.hu.nl",
-            "status":"afwezig",
-            "dagDeel":"middag",
-            "datum":"02-03-2017"
-          console.log("test_button_handler=" + this.naam);
           this.$.ajax_test.contentType="application/json";
           this.$.ajax_test.body={
               "klascode": "TICT-SIE-V1D"

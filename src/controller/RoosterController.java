@@ -41,13 +41,15 @@ public class RoosterController implements Handler{
 	private void ophalenRoosterKlas(Conversation conversation){
 		JsonParser parser = new JsonParser();
 		Gson gson = new Gson();
-		String jsonOut = "";
 		
 		JsonObject request = parser.parse(conversation.getRequestBodyAsString()).getAsJsonObject();
-
+		System.out.println(request.get("klascode").getAsString());
+		
+		String jsonOut = "";
+		System.out.println(conversation.getRequestBodyAsString());
 		if (request.get("klascode") != null){
-			if (informatieSysteem.getRoosterKlas("klascode") != null){
-				Rooster klasRooster = informatieSysteem.getRoosterKlas("klascode");
+			if (informatieSysteem.getRoosterKlas(request.get("klascode").getAsString()) != null){
+				Rooster klasRooster = informatieSysteem.getRoosterKlas(request.get("klascode").getAsString());
 				
 				conversation.sendJSONMessage(gson.toJson(klasRooster));
 				
