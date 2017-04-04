@@ -1,0 +1,104 @@
+<link rel="import" href="../../elements/elements.html">
+
+<link rel="import" href="../../src/my-home/my-home.html">
+<link rel="import" href="../../src/my-klassen/my-klassen.html">
+<link rel="import" href="../../src/my-login/my-login.html">
+<link rel="import" href="../../src/my-info/my-info.html">
+
+<dom-module id="my-route">
+  <link rel="import" type="css" href="../../styles/mainStyle.css">
+  <template>
+
+    <app-location route="{{_route}}" use-hash-as-path></app-location>
+
+    <app-route route="{{_route}}"
+               pattern="/:page"
+               data="{{_routeData}}"
+               tail="{{_routeTail}}"
+               active="{{_active}}"></app-route>
+
+    <app-route route="{{_routeTail}}"
+               pattern="/:subPage"
+               data="{{_subRouteData}}"
+               active="{{_subRouteActive}}"></app-route>
+
+  <paper-drawer-panel force-narrow>
+    <paper-header-panel drawer>
+
+      <paper-toolbar>
+        <paper-icon-button icon="close" paper-drawer-toggle></paper-icon-button>
+        <div style="margin-left: 10px; font-size: 20px;">Menu</div>
+      </paper-toolbar>
+
+      <div class="menu">
+        <iron-selector selected='[[_routeData.page]]' attr-for-selected='name'>
+          <a name="home" class="menuLink" href="#/home"><span>Home</span></a>
+          <a name="klassen" class="menuLink" href="#/klassen"><span>Klassen</span></a>
+          <a name="studentenInfo" class="menuLink" href="#/studentenInfo"><span>StudentenInfo</span></a>
+          <a name="logout" class="menuLink" href="#/logout"><span>Logout</span></a>
+        </iron-selector>
+      </div>
+
+    </paper-header-panel>
+
+    <paper-header-panel main>
+      <paper-toolbar>
+
+        <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
+        <div style="font-size: 20px;">StudentHUb</div>
+        <div class="title">{{_routeData.page}}</div>
+
+      </paper-toolbar>
+
+      <div class="container">
+          <div class="content">
+            <section id="main">
+              <iron-pages selected='{{_routeData.page}}' attr-for-selected='name'>
+                <my-home name="home" active="{{_subRouteActive}}"></my-home>
+                <my-klassen name="klassen"></my-klassen>
+                <my-info name=studentenInfo></my-info>
+
+                <section name="logout">
+                  <h1>Logout</h1>
+                </section>
+              </iron-pages>
+
+            <template is="dom-if" if="[[_subRouteActive]]" restamp>
+              <section id="sub">
+                <iron-pages attr-for-selected="name" selected="[[_subRouteData.subPage]]">
+                  <my-login name="test"></my-login>
+                </iron-pages>
+              </section>
+            </template>
+
+          </div>
+      </div>
+
+    </paper-header-panel>
+  </paper-drawer-panel>
+
+  </template>
+
+  <script>
+
+    Polymer({
+
+      is: 'my-route',
+
+      properties: {
+        _route: Object,
+        _routeData: Object,
+        _routeTail: Object,
+        _active: Boolean,
+      },
+
+      attached: function() {
+        if (!this._route.path) {
+          this.set('_route.path', '/home');
+        }
+      },
+
+    })
+
+  </script>
+</dom-module>

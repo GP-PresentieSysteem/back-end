@@ -15,7 +15,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <meta name="generator" content="Polymer Starter Kit">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>My App</title>
+    <title>studentHUb</title>
     <meta name="description" content="My App description">
 
     <link rel="icon" href="/images/favicon.ico">
@@ -28,24 +28,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <!-- Add to homescreen for Chrome on Android. Fallback for manifest.json -->
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="My App">
 
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="My App">
-
-    <!-- Homescreen icons -->
-    <link rel="apple-touch-icon" href="/images/manifest/icon-48x48.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/images/manifest/icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="96x96" href="/images/manifest/icon-96x96.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/images/manifest/icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="192x192" href="/images/manifest/icon-192x192.png">
-
-    <!-- Tile icon for Windows 8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="/images/manifest/icon-144x144.png">
-    <meta name="msapplication-TileColor" content="#3f51b5">
-    <meta name="msapplication-tap-highlight" content="no">
 
     <script>
       // Setup Polymer options
@@ -94,14 +81,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </script>
 
-    <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
-    <link rel="import" href="../bower_components/paper-button/paper-button.html">
-    <link rel="import" href="../../bower_components/paper-input/paper-input.html">
+    <!-- <link rel="import" href="/src/my-login/my-login.html"> -->
+    <link rel="import" href="/src/my-route/my-route.html">
 
-    <link rel="import" href="/src/my-klas.html">
-    <link rel="import" href="/src/my-student.html"> <!-- gewijzigd tov PSK  -->
-
-<!--  <link rel="import" href="/src/my-app/my-app.html"> -->
     <style>
       body {
         margin: 0;
@@ -109,21 +91,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         line-height: 1.5;
         min-height: 100vh;
         background-color: #eeeeee;
+        background-color: #fafafa;
+        color: #333;
+}
 
-        background-color: #fafafa;  /*ligth gray background empty canvas
-/*   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif; */
-       color: #333;
-    }
     </style>
   </head>
   <body>
-    <!--<my-app></my-app> -->
-    <my-klas klascode="TICT-SIE-V1D"></my-klas>
-    <!--<my-student gebruikersnaam="stefan.deraadt@student.hu.nl"></my-student>
-    <my-student gebruikersnaam="jan.dekkers@student.hu.nl"></my-student>
-    <my-student gebruikersnaam="chung.wong@student.hu.nl"></my-student>
-    <my-student gebruikersnaam="thomas.mocellin@student.hu.nl"></my-student>
-    <my-student gebruikersnaam="bart.vanstraaten@student.hu.nl"></my-student>-->
-    <!-- Built with love using Polymer Starter Kit -->
+    <!-- <my-login></my-login> -->
+    <my-route></my-route>
   </body>
 </html>

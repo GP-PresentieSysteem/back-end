@@ -1,0 +1,50 @@
+<link rel="import" href="../../elements/elements.html">
+
+<dom-module id="my-klassen">
+<link rel="import" type="css" href="../../styles/mainStyle.css">
+  <template>
+
+    <div class="">
+      <paper-card class="holder" elevation="2">
+
+          <vaadin-grid items="[[klassen]]">
+           <table>
+               <colgroup>
+                 <col name="naam" resizable>
+                 <col name="aantLeerling" resizable>
+                 <col name="richting" resizable flex sortable sortable sort-direction="asc">
+               </colgroup>
+           </table>
+          </vaadin-grid>
+
+      </paper-card>
+    </div>
+
+
+  </template>
+
+  <script>
+
+      Polymer({
+
+        is: 'my-klassen',
+
+        _test: function(){
+          console.log("test");
+        },
+
+        ready: function(){
+          this.klassen = [
+            {naam: 'v1d', aantLeerling: '23', richting: 'SIE'},
+            {naam: 'v1q', aantLeerling: '24', richting: 'SNE'},
+            {naam: 'v1g', aantLeerling: '25', richting: 'BIM'},
+            {naam: 'v1h', aantLeerling: '26', richting: 'TI'},
+            {naam: 'v19', aantLeerling: '27', richting: 'SIE'},
+          ];
+        },
+
+      })
+
+  </script>
+
+</dom-module>
