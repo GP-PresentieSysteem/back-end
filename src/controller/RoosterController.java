@@ -1,8 +1,13 @@
 package controller;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 
 import model.PrIS;
+import model.persoon.Student;
+import model.rooster.Rooster;
 import server.Conversation;
 import server.Handler;
 import java.util.*;
@@ -34,12 +39,21 @@ public class RoosterController implements Handler{
 	}
 	
 	private void ophalenRoosterKlas(Conversation conversation){
+		JsonParser parser = new JsonParser();
 		Gson gson = new Gson();
 		String jsonOut = "";
 		
-		jsonOut = gson.toJson(informatieSysteem.getRoosterKlas("TICT-SIE-V1D")); 
-		
-		conversation.sendJSONMessage(jsonOut);
+		JsonObject request = parser.parse(conversation.getRequestBodyAsString()).getAsJsonObject();
+
+		if (request.get("klascode") != null){
+			if (informatieSysteem.getRoosterKlas("klascode") != null){
+				Rooster klasRooster = informatieSysteem.getRoosterKlas("klascode");
+				
+				conversation.sendJSONMessage(gson.toJson(klasRooster));
+				
+				return;
+			}
+		}
 	}
 	
 	
