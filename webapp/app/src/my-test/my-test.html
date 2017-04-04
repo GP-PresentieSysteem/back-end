@@ -18,7 +18,7 @@
     <iron-ajax
       id="ajax_test"
       method="POST"
-      url="/rooster/student"
+      url="/rooster/les"
       handle-as="json"
       on-response="ajax_test_handler">
     </iron-ajax>
@@ -39,9 +39,15 @@
         },
 
          test_button_handler: function() {
+          console.log("test_button_handler=" + this.naam);
           this.$.ajax_test.contentType="application/json";
           this.$.ajax_test.body={
-              "klascode": "TICT-SIE-V1D"
+              "datum":"2017-02-06",
+              "beginTijd":"10:00",
+              "eindTijd":"12:30",
+              "vakCode":"TICT-V1OODC-15_2016",
+              "klasCode": "TICT-SIE-V1D",
+              "gebruikersnaamDocent":"peter.schuler@hu.nl"
           };
           this.$.ajax_test.generateRequest();
         },
