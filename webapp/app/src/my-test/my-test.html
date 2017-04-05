@@ -1,0 +1,134 @@
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<dom-module id="my-test">
+  <template>
+    <style>
+    </style>
+
+    <!-- klas info -->
+    <paper-button
+      id="test_button"
+      class="my-button"
+      on-click="test_button_handler"
+      raised>
+        Testklasinfo
+    </paper-button>
+
+    <iron-ajax
+      id="ajax_test"
+      method="POST"
+      url="/klas/info"
+      handle-as="json"
+      on-response="ajax_test_handler">
+    </iron-ajax>
+    <br>
+    <!-- klas info -->
+    <paper-button
+      id="test_button2"
+      class="my-button"
+      on-click="test_button_handler"
+      raised>
+        Test alleklassen
+    </paper-button>
+
+    <iron-ajax
+      id="ajax_test2"
+      method="POST"
+      url="/klassen/info"
+      handle-as="json"
+      on-response="ajax_test_handler">
+    </iron-ajax>
+    <br>
+    <!-- klas info -->
+    <paper-button
+      id="test_button3"
+      class="my-button"
+      on-click="test_button_handler"
+      raised>
+        Test docent
+    </paper-button>
+
+    <iron-ajax
+      id="ajax_test3"
+      method="POST"
+      url="/klas/slb"
+      handle-as="json"
+      on-response="ajax_test_handler">
+    </iron-ajax>
+
+
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+
+      /* _xxxx private              : geen external data binding      - geen notify
+         _c_xx private constant     : geen external binding, constant - geen notify
+         c_xx  public constant      : one way external databinding [[c_xx]] - geen notify nodig
+         xxxx  public               : two way external databinding {{xxxx}} - notify nodig
+      */
+      Polymer({
+        is: 'my-test',
+
+        properties: {
+          gebruikersnaam: {
+            type: String,
+            value: "stefan.deraadt@student.hu.nl",
+          },
+        },
+
+         test_button_handler: function() {
+          console.log("test_button_handler=" + this.naam);
+          this.$.ajax_test.contentType="application/json";
+          this.$.ajax_test.body={
+            "klascode": "V1E"
+          };
+          this.$.ajax_test.generateRequest();
+        },
+
+        ajax_test_handler: function(request) {
+          console.log(request.detail.response);
+          this.gebruikersnaam = request.detail.response.gebruikersnaam;
+          console.log(this.gebruikersnaam);
+
+        },
+
+        test_button_handler2: function() {
+         console.log("test_button_handler=" + this.naam);
+         this.$.ajax_test2.contentType="application/json";
+         this.$.ajax_test2.body={
+           "klassen": "V1A, V1B, V1C, V1D, V1E, V1F"
+         };
+         this.$.ajax_test2.generateRequest();
+       },
+
+       ajax_test_handler2: function(request) {
+         console.log(request.detail.response);
+         this.gebruikersnaam = request.detail.response.gebruikersnaam;
+         console.log(this.gebruikersnaam);
+
+       },
+
+       test_button_handler3: function() {
+        console.log("test_button_handler=" + this.naam);
+        this.$.ajax_test.contentType="application/json";
+        this.$.ajax_test.body={
+          "klascode": "V1E"
+        };
+        this.$.ajax_test3.generateRequest();
+      },
+
+      ajax_test_handler3: function(request) {
+        console.log(request.detail.response);
+        this.gebruikersnaam = request.detail.response.gebruikersnaam;
+        console.log(this.gebruikersnaam);
+
+      },
+
+      });
+
+    })();
+  </script>
+</dom-module>
