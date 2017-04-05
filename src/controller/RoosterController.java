@@ -46,6 +46,12 @@ public class RoosterController implements Handler {
 	private void ophalenRoosterKlas(Conversation conversation) {
 		JsonParser parser = new JsonParser();
 		Gson gson = new Gson();
+		
+		if (conversation.getRequestBodyAsString() == null){
+			conversation.sendJSONMessage("{\"error\":\"Geen json data mee gegeven\"}");
+			
+			return;
+		}
 
 		JsonObject request = parser.parse(conversation.getRequestBodyAsString()).getAsJsonObject();
 
@@ -68,6 +74,12 @@ public class RoosterController implements Handler {
 	private void ophalenAlleRoostersKlassen(Conversation conversation) {
 		JsonParser parser = new JsonParser();
 		Gson gson = new Gson();
+		
+		if (conversation.getRequestBodyAsString() == null){
+			conversation.sendJSONMessage("{\"error\":\"Geen json data mee gegeven\"}");
+			
+			return;
+		}
 
 		String jsonOut = "";
 
@@ -79,6 +91,12 @@ public class RoosterController implements Handler {
 	private void ophalenRoosterDocent(Conversation conversation) {
 		JsonParser parser = new JsonParser();
 		Gson gson = new Gson();
+		
+		if (conversation.getRequestBodyAsString() == null){
+			conversation.sendJSONMessage("{\"error\":\"Geen json data mee gegeven\"}");
+			
+			return;
+		}
 
 		JsonObject request = parser.parse(conversation.getRequestBodyAsString()).getAsJsonObject();
 		System.out.println(request.get("gebruikersnaamDocent").getAsString());
@@ -98,6 +116,12 @@ public class RoosterController implements Handler {
 	private void ophalenAlleRoostersDocenten(Conversation conversation) {
 		Gson gson = new Gson();
 		String jsonOut = "";
+		
+		if (conversation.getRequestBodyAsString() == null){
+			conversation.sendJSONMessage("{\"error\":\"Geen json data mee gegeven\"}");
+			
+			return;
+		}
 
 		jsonOut = gson.toJson(informatieSysteem.getRooster());
 
@@ -106,8 +130,14 @@ public class RoosterController implements Handler {
 
 	private void ophalenLes(Conversation conversation) {
 		JsonParser parser = new JsonParser();
-
 		Gson gson = new Gson();
+		
+		if (conversation.getRequestBodyAsString() == null){
+			conversation.sendJSONMessage("{\"error\":\"Geen json data mee gegeven\"}");
+			
+			return;
+		}
+		
 		JsonObject request = parser.parse(conversation.getRequestBodyAsString()).getAsJsonObject();
 		String datum = request.get("datum").getAsString();
 		String beginTijd = request.get("beginTijd").getAsString();
@@ -116,20 +146,10 @@ public class RoosterController implements Handler {
 		String klasCode = request.get("klasCode").getAsString();
 
 		String jsonOut = "";
-
-		if (datum != null && beginTijd != null && eindTijd != null && vakCode != null && klasCode != null) {
+		
+		if (datum != null || beginTijd != null || eindTijd != null || vakCode != null || klasCode != null) {
 			jsonOut = gson.toJson(informatieSysteem.getLes(datum, beginTijd, eindTijd, klasCode, vakCode));
 		}
-		/*
-		 * DateTimeFormatter formatter =
-		 * DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); formatter =
-		 * formatter.withLocale(Locale.GERMANY);
-		 * 
-		 * LocalDateTime beginDatum = LocalDateTime.parse("2017-02-06 10:00",
-		 * formatter); LocalDateTime eindDatum =
-		 * LocalDateTime.parse("2017-02-06 12:30", formatter);
-		 */
-
 		conversation.sendJSONMessage(jsonOut);
 	}
 }
